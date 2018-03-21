@@ -30,19 +30,18 @@ CREATE TABLE IF NOT EXISTS project.wettestpop (
 		totalrainfall double,
 		wettestpopulation double
 		)		
+		
 		PARTITIONED BY (year STRING,month STRING)
 		STORED AS PARQUET;
 
-INSERT OVERWRITE TABLE project.wettestpop 
-
-		PARTITION (year, month)
-		SELECT msa,
+INSERT OVERWRITE TABLE project.wettestpop PARTITION (year, month)
+		SELECT 	msa,
 			population,
 			totalrainfall,
 			wettestpopulation,
 			year,
 			month
-FROM wettestpop_ext;
+		FROM wettestpop_ext;
 
  
 
